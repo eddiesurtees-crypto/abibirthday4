@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abi's Birthday Getaway</title>
+    <!-- Importing Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CORE ANIMATIONS --- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* --- BASE STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* Light, Luxury Background */
+            background-color: #fcfbfb; 
+            background-image: 
+                radial-gradient(circle at 0% 0%, #fff0f5 0%, transparent 60%), /* Lavender Blush */
+                radial-gradient(circle at 100% 40%, #fff5e6 0%, transparent 50%), /* Champagne */
+                radial-gradient(circle at 50% 100%, #fce4ec 0%, transparent 50%); /* Rose */
+            color: #5d4d50; /* Warm Charcoal/Brown */
+            font-family: 'Lato', sans-serif;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: #2a1b1f; /* Deep warm black */
+            letter-spacing: -0.01em;
+        }
+
+        /* Richer Rose Gold Gradient for Light Bg */
+        .rose-gold-text {
+            background: linear-gradient(90deg, #b07d72, #e0a89e, #c78d82, #b07d72);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmer 8s linear infinite;
+        }
+
+        p {
+            font-weight: 400;
+            font-size: 1.05rem;
+            color: #6d5e60; 
+            margin-bottom: 1.5rem;
+            line-height: 1.9;
+        }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 80px 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Soft Pastel Glows */
+        .ambient-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 200, 210, 0.4); 
+            filter: blur(100px);
+            border-radius: 50%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 40px 0 80px 0;
+            opacity: 0;
+            animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        header .intro-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #b5867d; /* Antique Rose */
+            display: block;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        header h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            font-weight: 500;
+            letter-spacing: -2px;
+        }
+
+        header h1 span {
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            display: block;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            color: #2a1b1f; /* Solid dark color for readability */
+        }
+
+        header .subtitle {
+            font-size: 1.3rem;
+            color: #7a6a6d;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* --- DIVIDERS --- */
+        .divider-vertical {
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, #d4a59a, transparent);
+            margin: 0 auto 40px auto;
+            opacity: 0.8;
+        }
+
+        /* --- DAY MARKERS --- */
+        .day-header {
+            text-align: center;
+            margin-bottom: 60px;
+            margin-top: 80px;
+            position: relative;
+            opacity: 0;
+            animation: fadeUp 1s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        .day-badge {
+            display: inline-block;
+            border: 1px solid rgba(181, 134, 125, 0.3);
+            padding: 8px 24px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            margin-bottom: 15px;
+            box-shadow: 0 4px 20px rgba(181, 134, 125, 0.1);
+        }
+
+        .day-badge h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #b5867d;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .day-header .date-sub {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: #4a3b3e;
+            margin-top: 15px;
+        }
+
+        /* --- WHITE GLASS CARDS --- */
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 80px;
+            /* Soft, warm shadow */
+            box-shadow: 0 20px 60px rgba(180, 150, 150, 0.12), 0 0 20px rgba(255,255,255,0.8);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            opacity: 0;
+            animation: fadeUp 1s ease-out forwards;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.005);
+            box-shadow: 0 30px 70px rgba(180, 150, 150, 0.18);
+            border-color: #fff;
+        }
+
+        .card:nth-of-type(1) { animation-delay: 0.3s; }
+        .card:nth-of-type(2) { animation-delay: 0.4s; }
+        .card:nth-of-type(3) { animation-delay: 0.5s; }
+        .card:nth-of-type(4) { animation-delay: 0.6s; }
+        .card:nth-of-type(5) { animation-delay: 0.7s; }
+
+        .card-image-wrapper {
+            position: relative;
+            height: 450px;
+            overflow: hidden;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        /* Light gradient overlay */
+        .card-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(255,255,255,1) 10%, rgba(255,255,255,0.8) 40%, transparent);
+            z-index: 1;
+        }
+
+        .card-content {
+            padding: 30px 50px 50px 50px;
+            position: relative;
+            z-index: 2;
+            margin-top: -50px;
+        }
+
+        .card-title {
+            font-size: 2.8rem;
+            margin-bottom: 5px;
+            line-height: 1.1;
+            color: #2a1b1f;
+            /* No shadow for clean look */
+        }
+
+        .card-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #b5867d;
+            margin-bottom: 25px;
+            display: block;
+            font-weight: 600;
+        }
+
+        /* --- TAGS --- */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid rgba(181, 134, 125, 0.25);
+            color: #8c6b63;
+            border-radius: 4px;
+            padding: 8px 16px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .pill:hover {
+            background: #fff5f2;
+            border-color: #b5867d;
+            color: #b5867d;
+        }
+        
+        /* --- LINKS --- */
+        .website-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 15px 35px;
+            border: 1px solid #b5867d;
+            color: #b5867d;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            background: transparent;
+        }
+
+        .website-btn:hover {
+            background: #b5867d;
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(181, 134, 125, 0.3);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 100px 20px;
+            opacity: 0.8;
+        }
+        
+        footer p {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.8rem;
+            color: #4a3b3e;
+        }
+
+        .signature {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #b5867d;
+            margin-top: 20px;
+            display: block;
+            font-weight: 600;
+        }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 600px) {
+            header h1 { font-size: 3rem; }
+            header h1 span { font-size: 1.8rem; }
+            .card-title { font-size: 2rem; }
+            .card-image-wrapper { height: 300px; }
+            .container { padding: 40px 15px; }
+            .card-content { padding: 30px 25px; margin-top: -40px; }
+            .pill { padding: 6px 12px; font-size: 0.65rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Ambient background glows -->
+<div class="ambient-glow" style="top: -5%; left: -10%; background: rgba(255, 230, 235, 0.6);"></div>
+<div class="ambient-glow" style="top: 30%; right: -20%; width: 600px; height: 600px; background: rgba(255, 240, 220, 0.5);"></div>
+<div class="ambient-glow" style="bottom: 10%; left: -10%; background: rgba(255, 220, 230, 0.5);"></div>
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <span class="intro-label">The Itinerary</span>
+        <h1 class="rose-gold-text">ABI’S<br><span>Birthday Getaway</span></h1>
+        <div class="divider-vertical"></div>
+        <p class="subtitle">“To Abi – Happy Birthday! Pack your bags on December 18th for a 5 Michelin star trip!”</p>
+        <span style="font-family: 'Cinzel', serif; color: #b5867d; letter-spacing: 3px; font-size: 0.8rem; margin-top: 30px; display: block; font-weight: 600;">Dec 18 — 20</span>
+    </header>
+
+    <!-- Day 1 -->
+    <div class="day-header" style="margin-top: 20px;">
+        <div class="day-badge">
+            <h2>Day One</h2>
+        </div>
+        <span class="date-sub">December 18th</span>
+    </div>
+
+    <article class="card">
+        <div class="card-image-wrapper">
+            <img src="https://www.cambrian-news.co.uk/tindle-static/image/2022/10/20/16/Heather_Birnie_Ynyshir_145.jpg" alt="Ynyshir Restaurant" class="card-image" onerror="this.src='https://placehold.co/700x500/fff/b5867d?text=Ynyshir';">
+            <div class="card-image-overlay"></div>
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">Ynyshir</h3>
+            <span class="card-subtitle">2 Michelin Stars</span>
+            
+            <div class="tags-container">
+                <span class="pill">2 Michelin Stars</span>
+                <span class="pill">30-Course Tasting Menu</span>
+                <span class="pill">Welsh Countryside</span>
+            </div>
+
+            <p>To kick things off, we’re dining and staying at Ynyshir — a modern Georgian house tucked away in the Welsh countryside. It’s a proper experience: incredible cooking, relaxed atmosphere, music, fire, and 30 courses that change throughout the night. I have struggled to keep this quiet!</p>
+            <a href="https://www.ynyshir.co.uk/" target="_blank" class="website-btn">Explore Ynyshir</a>
+        </div>
+    </article>
+
+    <!-- Day 2 -->
+    <div class="day-header">
+        <div class="day-badge">
+            <h2>Day Two</h2>
+        </div>
+        <span class="date-sub">December 19th</span>
+    </div>
+
+    <article class="card">
+        <div class="card-image-wrapper">
+            <img src="https://penmaenuchaf.co.uk/wp-content/uploads/2025/04/020425_027-1367x911.jpg" alt="Penmaenuchaf Hotel" class="card-image" onerror="this.src='https://placehold.co/700x500/fff/b5867d?text=Penmaenuchaf';">
+            <div class="card-image-overlay"></div>
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">Check In – Penmaenuchaf</h3>
+            <span class="card-subtitle">Boutique Stone Manor</span>
+            
+            <div class="tags-container">
+                <span class="pill">Snowdonia</span>
+                <span class="pill">Mountain Views</span>
+                <span class="pill">Boutique Stay</span>
+            </div>
+
+            <p>After eating and staying over at Ynyshir, we head about 30 minutes further into the mountains to check into Penmaenuchaf — a boutique stone manor in the Welsh hills.</p>
+            <a href="https://penmaenuchaf.co.uk/" target="_blank" class="website-btn">View Hotel</a>
+        </div>
+    </article>
+
+    <article class="card">
+        <div class="card-image-wrapper">
+            <img src="https://uploads.littlewander.co.uk/app/uploads/sites/2/2024/03/Gwen_web.jpg" alt="Dinner at Gwen" class="card-image" onerror="this.src='https://placehold.co/700x500/fff/b5867d?text=Gwen';">
+            <div class="card-image-overlay"></div>
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">Dinner at Gwen</h3>
+            <span class="card-subtitle">Sister Restaurant to Ynyshir</span>
+            
+            <div class="tags-container">
+                <span class="pill">Tasting Menu</span>
+                <span class="pill">Intimate Setting</span>
+            </div>
+
+            <p>For tonight, we are settling in for an intimate, warm evening. We'll enjoy a curated tasting menu that perfectly complements yesterday's excitement, offering beautiful flavors in a relaxed setting just for the two of us.</p>
+            <a href="https://gwenrestaurant.co.uk/" target="_blank" class="website-btn">Discover Gwen</a>
+        </div>
+    </article>
+
+    <!-- Day 3 -->
+    <div class="day-header">
+        <div class="day-badge">
+            <h2>Day Three</h2>
+        </div>
+        <span class="date-sub">December 20th</span>
+    </div>
+
+    <article class="card">
+        <div class="card-image-wrapper">
+            <img src="https://cdn.sanity.io/images/jwvdtspk/production/c657b332a754ad90ec2c01989d20e3bd9bc7a122-1000x667.jpg" alt="Moor Hall" class="card-image" onerror="this.src='https://placehold.co/700x500/fff/b5867d?text=Moor+Hall';">
+            <div class="card-image-overlay"></div>
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">Moor Hall</h3>
+            <span class="card-subtitle">3 Michelin Stars</span>
+            
+            <div class="tags-container">
+                <span class="pill">3 Michelin Stars</span>
+                <span class="pill">Tasting Menu</span>
+                <span class="pill">Michelin Green Star</span>
+            </div>
+
+            <p>For the final stop (surprise now fully ruined), we’re heading to Moor Hall — a luxury 5-star hotel in Ormskirk. We’re eating in their 3-Michelin-star restaurant, one of only two outside London alongside L’Enclume.</p>
+            <a href="https://moorhall.com/" target="_blank" class="website-btn">Visit Moor Hall</a>
+        </div>
+    </article>
+
+    <article class="card">
+        <div class="card-image-wrapper">
+            <img src="https://www.hospitality-interiors.net/wp-content/uploads/2024/07/Koto_MoorHall_Photographer_Olco-Studios-0-1024x537.jpg" alt="Anise Hyssop Suite" class="card-image" onerror="this.src='https://placehold.co/700x500/fff/b5867d?text=Anise+Hyssop';">
+            <div class="card-image-overlay"></div>
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">Anise Hyssop</h3>
+            <span class="card-subtitle">Our Private Suite</span>
+            
+            <div class="tags-container">
+                <span class="pill">Private Garden Room</span>
+                <span class="pill">Hot Tub</span>
+            </div>
+
+            <p>The best suite at Moor Hall. A private garden room with its own hot tub, a big terrace looking out over the grounds, and plenty of space to relax after dinner. Then the next morning, we’ve got breakfast at Moor Hall before heading home.</p>
+            <a href="https://moorhall.com/rooms/anise-hyssop" target="_blank" class="website-btn">See The Suite</a>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="divider-vertical" style="height: 50px;"></div>
+        <p>Can’t wait to spend this adventure with you.</p>
+        <span class="signature">Love you always, Eddie xx</span>
+    </footer>
+
+</div>
+
+</body>
+</html>
